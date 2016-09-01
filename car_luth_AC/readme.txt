@@ -1,5 +1,7 @@
 Updated 09/01/2016 using Version 3.0
 
+procedure:
+
 1) compile the code with 
             FLAG_1 = -DDOUBLE_PRECISION
             FLAG_2 = -DPARALLEL
