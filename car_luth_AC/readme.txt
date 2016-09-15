@@ -1,6 +1,4 @@
-Updated 09/01/2016 using Version 3.0
-
-procedure:
+Updated 09/15/2016 using Version 3.0
 
 1) compile the code with 
             FLAG_1 = -DDOUBLE_PRECISION
@@ -13,5 +11,5 @@ procedure:
 
 4) to to /postprocessing/ and use plot_compare_A.m to plot results
 
-The procedure for Case C in /02_CaseC/
+The procedure for Case C in /02_CaseC/ and other finer grids
 
