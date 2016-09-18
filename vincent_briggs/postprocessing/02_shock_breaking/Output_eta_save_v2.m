@@ -1,14 +1,14 @@
 clear all; clc; close all;
 
-inputpath='../result_01/';
+inputpath='../result_02/';
 fn=load('./fname.in');
 
 for k=1:1:length( fn )
     
-        fname=[ inputpath, 'result\eta_', num2str( fn(k), '%05d' ) ];
+        fname=[ inputpath, 'eta_', num2str( fn(k), '%05d' ) ];
         eta = load( fname );
 
-        outname=[ inputpath, 'result\eta_', num2str( fn(k), '%05d' ), '.mat' ];
+        outname=[ inputpath, 'eta_', num2str( fn(k), '%05d' ), '.mat' ];
         save( outname, 'eta' );
         clear eta;
         
