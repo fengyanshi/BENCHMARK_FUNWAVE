@@ -1,0 +1,183 @@
+!INPUT FILE FOR FUNWAVE_TVD 
+  ! NOTE: all input parameter are capital sensitive 
+  ! --------------------TITLE------------------------------------- 
+  ! title only for log file 
+TITLE = saco_calibration_2m
+  ! -------------------PARALLEL INFO----------------------------- 
+   !  
+   !    PX,PY - processor numbers in X and Y 
+   !    NOTE: make sure consistency with mpirun -np n (px*py) 
+   !     
+ PX = 12
+ PY = 16
+   ! --------------------DEPTH------------------------------------- 
+   ! Depth types, DEPTH_TYPE=DATA: from depth file 
+   !              DEPTH_TYPE=FLAT: idealized flat, need depth_flat 
+   !              DEPTH_TYPE=SLOPE: idealized slope,  
+   !                                 need slope,SLP starting point, Xslp 
+   !                                 and depth_flat 
+ DEPTH_TYPE = DATA 
+ DEPTH_FILE = depth.txt
+ 
+   ! -------------------PRINT--------------------------------- 
+   ! PRINT*, 
+   ! result folder 
+RESULT_FOLDER = ./output/
+   ! ------------------DIMENSION----------------------------- 
+   ! global grid dimension 
+ Mglob = 1750
+ Nglob = 2276
+
+   ! ----------------- TIME---------------------------------- 
+   ! time: total computational time/ plot time / screen interval  
+   ! all in seconds 
+ TOTAL_TIME = 3600.0
+ PLOT_INTV = 1.0
+ PLOT_INTV_STATION = 0.1 
+ SCREEN_INTV = 1.0 
+
+   ! -----------------GRID---------------------------------- 
+   ! if use spherical grid, in decimal degrees 
+ DX = 2.0
+ DY = 2.0 
+   ! ----------------WAVEMAKER------------------------------ 
+   !  wave maker 
+   ! LEF_SOL- left boundary solitary, need AMP,DEP, LAGTIME 
+   ! INI_SOL- initial solitary wave, WKN B solution,  
+   ! need AMP, DEP, XWAVEMAKER  
+   ! INI_REC - rectangular hump, need to specify Xc,Yc and WID 
+   ! WK_REG - Wei and Kirby 1999 internal wave maker, Xc_WK,Tperiod 
+   !          AMP_WK,DEP_WK,Theta_WK, Time_ramp (factor of period) 
+   ! WK_IRR - Wei and Kirby 1999 TMA spectrum wavemaker, Xc_WK, 
+   !          DEP_WK,Time_ramp, Delta_WK, FreqPeak, FreqMin,FreqMax, 
+   !          Hmo,GammaTMA,ThetaPeak 
+   ! WK_TIME_SERIES - fft time series to get each wave component 
+   !                 and then use Wei and Kirby 1999  
+   !          need input WaveCompFile (including 3 columns: per,amp,pha) 
+   !          NumWaveComp,PeakPeriod,DEP_WK,Xc_WK,Ywidth_WK 
+!WAVEMAKER = ABSORBING_GENERATING
+!WAVE_DATA_TYPE = WK_IRR
+!DepthWaveMaker = 14.0
+
+WAVEMAKER = WK_NEW_IRR
+Nfreq = 1125    ! 45Nfreq*25Ntheta (similar to WK_IRR default values)
+Ntheta = 25     ! odd number is recommended, thus mean dir will have a component
+DEP_WK = 17.0 
+Xc_WK = 370.0 
+Yc_WK = 2450.5
+Ywidth_WK = 45010000.0 
+FreqPeak = 0.06756
+FreqMin = 0.03
+FreqMax = 0.3 
+Hmo = 6.0
+GammaTMA = 5.0 
+ThetaPeak = -25.0 
+Sigma_Theta = 10.0
+Delta_WK = 2.0
+
+!Nfreq = 1125
+!Ntheta = 25
+!Delta_WK = 0.5
+!alpha_c = 50.0
+
+!WaterLevel=2.0
+
+!WAVEMAKER = TIME_SPECTRA
+!SPECTRA_FILE = spectra_file.txt
+
+
+  ! ----------------- TIDE DATA
+TIDAL_BC_GEN_ABS = F
+TideBcType = DATA
+TideWestFileName = tide_west_15min.txt
+
+  ! ---------------- PERIODIC BOUNDARY CONDITION --------- 
+  ! South-North periodic boundary condition 
+  ! 
+PERIODIC = T
+
+  ! ---------------- SPONGE LAYER ------------------------ 
+  ! need to specify widths of four boundaries and parameters if needed
+  ! set width=0.0 if no sponge 
+DIFFUSION_SPONGE = F 
+FRICTION_SPONGE = T 
+DIRECT_SPONGE = T 
+Csp = 0.0 
+CDsponge = 1.0 
+Sponge_west_width =  160.0 
+Sponge_east_width =  0.0 
+Sponge_south_width = 0.0 
+Sponge_north_width = 0.0 
+
+  ! ----------------PHYSICS------------------------------ 
+  ! parameters to control type of equations 
+  ! dispersion: all dispersive terms 
+  ! gamma1=1.0,gamma2=1.0: defalt: Fully nonlinear equations 
+  !----------------Friction----------------------------- 
+Cd = 0.002
+
+  ! ----------------NUMERICS---------------------------- 
+  ! time scheme: runge_kutta for all types of equations 
+  !              predictor-corrector for NSWE 
+  ! space scheme: second-order 
+  !               fourth-order 
+  ! construction: HLLC 
+  ! cfl condition: CFL 
+  ! froude number cap: FroudeCap 
+! HIGH_ORDER = THIRD 
+  ! CFL 
+CFL = 0.05 
+  ! Froude Number Cap (to avoid jumping drop, set 1.5) 
+FroudeCap = 1.5 
+
+  ! --------------WET-DRY------------------------------- 
+  ! MinDepth for wetting-drying 
+MinDepth=0.001 
+
+  ! -------------- BREAKING ----------------------------
+! Shock-capturing on
+VISCOSITY_BREAKING = F  
+Cbrk1 = 0.45 
+Cbrk2 = 0.35 
+  ! ----------------- WAVE AVERAGE ------------------------ 
+  ! if use smagorinsky mixing, have to set -DMIXING in Makefile 
+  ! and set averaging time interval, T_INTV_mean, default: 20s 
+T_INTV_mean = 600.0 
+STEADY_TIME = 600.0 
+
+  ! -----------------OUTPUT----------------------------- 
+  ! stations  
+  ! if NumberStations>0, need input i,j in STATION_FILE 
+NumberStations = 0
+STATIONS_FILE = station_transects_dx010.txt 
+  ! output variables, T=.TRUE, F = .FALSE. 
+FIELD_IO_TYPE = BINARY
+DEPTH_OUT = T 
+U = F 
+V = F 
+ETA = T 
+Hmax = F 
+Hmin = F 
+MFmax = F 
+Umax = F 
+VORmax = F 
+Umean = T 
+Vmean = T 
+ETAmean = T 
+MASK = T 
+MASK9 = F 
+SXL = F 
+SXR = F 
+SYL = F 
+SYR = F 
+SourceX = F 
+SourceY = F 
+P = F 
+Q = F 
+Fx = F 
+Fy = F 
+Gx = F 
+Gy = F 
+AGE = F 
+TMP = F 
+WaveHeight = T 

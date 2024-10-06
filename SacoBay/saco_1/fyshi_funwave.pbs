@@ -1,0 +1,58 @@
+#!/bin/bash
+#PBS -A ERDCV00898FUN
+#PBS -l select=1:ncpus=192:mpiprocs=192
+#PBS -l walltime=24:00:00
+#PBS -l application=funwave
+#PBS -N largewave
+#PBS -q standard_sm
+#PBS -M fyshi@udel.edu
+#PBS -j oe
+
+## Execution Block ----------------------------------------------
+# Environment Setup
+FUNWAVE=${HOME}/FUNWAVE-TVD
+EXEC=${FUNWAVE}/funwave_wave
+
+INPUT=${PBS_O_WORKDIR}
+DATA=${HOME}/Applications/Saco/Torres
+
+# cd to your scratch directory in /work
+RUNDIR=${WORKDIR}/saco_1
+mkdir -p ${RUNDIR}
+mkdir -p ${RUNDIR}/output
+
+cd ${RUNDIR}
+
+##  Use the correct programming environment to compile and execute the code
+##  Default programming environment is PrgEnv-cray
+#
+##  Change to Intel:
+# module swap PrgEnv-cray PrgEnv-intel
+#
+##  Change to Gnu:
+# module swap PrgEnv-cray PrgEnv-gnu
+
+
+##  Compile with Cray:
+# ftn -O3 -O scalar3 -O vector3 -O fp3 mpi_hello.f90 -o mpi_hello.x
+#
+##  Compile with Gnu:
+# ftn -Ofast mpi_hello.f90 -o mpi_hello.x
+#
+##  Compile with Intel:
+# ftn -O3 -no-prec-div -fp-model fast=2 mpi_hello.f90 -o mpi_hello.x
+
+##  Execute on 2 nodes, 192 mpi processes per node, for 384 total mpi processes
+
+## Launching -----------------------------------------------------
+# copy desired/needed files and run the job
+cp ${INPUT}/input.txt ${RUNDIR}/input.txt
+cp ${INPUT}/depth_2m_1750x2276.txt ${RUNDIR}/depth.txt
+# The following two lines provide an example of setting up and running 
+# a CRAY MPICH parallel code  built with the INTEL compiler.
+module swap PrgEnv-cray PrgEnv-intel
+module load mpi
+
+aprun -n 192 ${EXEC}
+
+exit
