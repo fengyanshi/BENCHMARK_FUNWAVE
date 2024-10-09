@@ -1,0 +1,292 @@
+! INPUT FILE FOR highly dispersive model
+! NOTE: all input parameter are capital sensitive
+
+! --------------------TITLE-------------------------------------
+TITLE = TEST_RUN
+  ! --------------- Subgrid info
+  ! SubGrid - number of subgrid (NumGrid=1+SubGrid)
+SubGrid = 0
+SubGrid_FILE = subgrid_info.txt
+NESTING_X1D = T
+DEPTH_FULL_FILE = dep_1d.txt
+Mdep = 1800
+Ndep = 1
+MainGridRatio = 10
+! -----------------HOT START----------------------------------
+HOTSTART = F
+Eta_HotStart_File = eta_init.ini
+U_HotStart_File = u_init.ini
+V_HotStart_File = v_init.ini
+W_HotStart_File = w_init.ini
+P_HotStart_File = p_init.ini
+Sali_HotStart_File = sali_init.ini
+Temp_HotStart_File = temp_init.ini
+Rho_HotStart_File = rho_init.ini
+TKE_HotStart_File = tke_init.ini
+EPS_HotStart_File = eps_init.ini
+Pmb_HotStart_File = pmb_init.ini
+! ---------------- RESULT_FOLDER-------------------------------
+RESULT_FOLDER = /lustre/scratch/fyshi/F2WAVE/
+! ----------------------BATHYMETRY---------------------------
+! if analytical bathymetry
+DEPTH_TYPE = CELL_CENTER
+ANA_BATHY  = F
+DEPTH_FILE = depth.txt
+! --------------------DIMENSION---------------------------------
+! cell numbers
+Mglob = 1024
+Nglob = 512
+Kglob = 3
+
+! --------------------PROCESSOR NUMBER-------------------------
+! processors in x and y direction (for parallel run)
+PX = 8
+PY = 8
+
+! -----------------------TIME----------------------------------
+! time: total computational time/ plot time / screen interval 
+! all in seconds
+SIM_STEPS = 100000000
+TOTAL_TIME =100.0
+PLOT_START = 0.0
+PLOT_INTV = 5.0
+SCREEN_INTV = 1.0
+
+! ------------------------GRID----------------------------------
+! grid sizes
+DX = 1.0
+DY = 1.0
+! ---------------------VERTICAL GRID OPTION--------------------
+! IVGRD = 1: uniform; 2: exponential
+IVGRD = 1
+GRD_R = 1.1
+! ----------------------TIME STEP---------------------------------
+DT_INI = 0.050
+DT_MIN = 0.000010
+DT_MAX = 10.00000
+
+! ----------------------NUMERICS------------------------------------
+HIGH_ORDER = SECOND
+TIME_ORDER = SECOND
+HLLC = F
+CONVECTION = NOTVD
+! ----------------------BOTTOM ROUGHNESS----------------------------
+! Ibot=1: Given drag coefficient Cd0
+! Ibot=2: Given bottom roughness Zob
+Ibot = 2
+Cd0 = 0.002
+Zob = 0.001
+
+! ---------------------BAROTROPIC--------------------------
+! if barotropic run
+BAROTROPIC = F
+
+! ----------------------NON-HYDRO-----------------------------------
+! if non-hydrostatic simulation
+NON_HYDRO = T
+
+! --------------------COURANT_NUMBER---------------------------------
+CFL = 0.5
+! --------------------Fourde Cap ----------------------------------
+FROUDE_CAP = 10.0
+! ---------------------RAMP-UP--------------------------------
+! time to ramp up simulation
+TRAMP = 0.0
+
+
+! --------------------VISCOSITY--------------------------------------
+VISCOUS_FLOW = F
+IVTURB = 2
+IHTURB = 2
+VISCOSITY = 1.e-6
+Schmidt = 1.0
+Chs = 0.01
+Cvs = 0.0001
+
+! --------------------VISCOUS NUMBER----------------------------------
+! time step limited by diffusion terms
+VISCOUS_NUMBER = 0.1666667
+
+! ----------------------WET-DRY-----------------------------------------
+! minimum depth for wetting-drying
+MinDep = 0.20
+
+! ---------------------POISSON SOLVER-----------------------------------
+! isolver is an option for different preconditioner.
+! itmax is the maximum number of iterations.
+! tol is the stopping criterion.
+!
+! isolver=1: Modified Incomplete Cholesky CG
+! isolver=2: Incomplete Cholesky GMRES
+! isolver=3: Successive Overrelaxation (SOR) GMRES
+ISOLVER = 2
+ITMAX = 1000
+TOL = 1.e-8
+
+
+! ------------------PERIODIC BC------------------------------------
+! periodic=.true. : periodic boundary condition in y direction
+! Notice if periodic=.true., Nglob must be power-of-two.
+! No periodic boundaries in serial run.
+PERIODIC_X = F
+PERIODIC_Y = F
+
+! ------------------EXTERNAL FORCING------------------------------
+EXTERNAL_FORCING = F
+
+
+! ------------------PERIODIC BC------------------------------------------
+! periodic=.true. : periodic boundary condition in y direction
+! Notice if periodic=.true., Nglob must be power-of-two and PY must be 1.
+! No periodic boundaries in serial run.
+PERIODIC = F
+
+! -------------------BOUNDARY_TYPE---------------------------------------
+! bc_type=1: free-slip
+!         2: no-slip
+!         3: influx
+!         4: outflux
+!         5: bottom friction
+BC_X0 = 1
+BC_Xn = 1
+BC_Y0 = 1
+BC_Yn = 1
+BC_Z0 = 5
+BC_Zn = 1
+
+! --------------------- BOUNDARY CONDITIONS
+! TID_FLX_LR tidal flux at left and right boundaries, 
+!              need a file containing time,Uin_X0,Uin_Xn, Ein_X0 and Ein_Xn
+! TID_ELE_LR - tidal elevation at left and right boundaries
+!              need a file containing the same thing as TID_FLX_LR
+!              Nudging = T for nudging boundary condition, otherwise
+!              for zero-gradient outflow
+BOUNDARY = nothingTID_FLX_LR
+!BOUNDARY = nothing
+! ***** NEED TO CHANGE BOUNDARY FILE --- MAKE U VELOCITY NEGATIVE FOR E TO WEST FLOW****
+BoundaryFile = ../input/boundary.txt
+Nudging = F
+
+! ---------------------- INITIAL CONDITIONS
+! INI_SALI_INPUT - salinity data type, 
+!                CONSTANT: use INI_SALI to specify
+!                DATA: use INI_SALI_FILE to specify field
+! INI_TEMP_INPUT - temporature data type, 
+!                CONSTANT: use INI_TEMP to specify
+!                DATA: use INI_TEMP_FILE to specify field
+INI_SALI_INPUT = CONSTANT
+INI_SALI = 25.0
+!INI_SALI_FILE = '../input/ini_sali.txt'
+INI_TEMP_INPUT = CONSTANT
+INI_TEMP = 0.0
+!INI_TEMP_FILE = '../input/ini_sali.txt'
+! ---------------------WAVEMAKER-----------------------------------------
+! wavemaker
+! AMP - wave height; PER - wave period; DEP - incident water depth
+! THETA - incident wave angle
+! LEF_SOL - left boundary solitary wave, need AMP,DEP
+! LEF_LIN - left boundary linear wave, need AMP,PER,DEP
+! LEF_CON - left boundary cnoidal wave, need AMP,PER,DEP
+! LEF_STK - left boundary stokes wave, need AMP,PER,DEP
+! LEF_TID - left boundary tide wave, has to specify in subroutine
+! LEF_SPC - left boundary 2D spectral, need spectral input spc2d.txt
+! INI_ETA - initial surface elevation specified in subroutine initial
+! INT_LIN - internal wavemaker for linear wave
+! INT_CON - internal wavemaker for cnoidal wave
+! INT_SOL - internal wavemaker for solitary wave
+! INT_SPC - internal wavemaker for random wave
+!WAVEMAKER = INT_LIN
+WAVEMAKER = nothing
+AMP = 0.04
+PER = 1.2
+DEP = 0.50
+THETA = 0.0
+
+! ----------------------INTERNAL WAVEMAKER--------------------------------
+! parameters for internal wavemaker
+Xsource_West = 7.0
+Xsource_East = 7.3
+Ysource_Suth = 0.0
+Ysource_Nrth = 1000000.0
+
+! ---------------------PARAMETERS FOR JONSWAP SPECTRUM------------------
+! Hm0 - significant wave height
+! Tp - peak wave period
+! Freq_Min - minimum wave frequency
+! Freq_Max - maximum wave frequency
+! NumFreq - number of frequency discretizations
+! Hm0 = 1.0
+!Tp = 10.0
+!Freq_Min = 0.05
+!Freq_Max = 0.3
+!NumFreq = 30
+
+! ----------------SPONGE LAYER------------------------------------
+! DHI type sponge layer
+! need to specify widths of four boundaries and parameters
+! set width=0.0 if no sponge
+! R_sponge: decay rate
+! A_sponge: maximum decay rate
+! e.g., sharp: R=0.85, A=5.0
+!       mild: R=0.90, A=5.0
+!       very mild: R=0.95, A=5.0
+SPONGE_ON = T
+Sponge_West_Width =  50.0
+Sponge_East_Width =  0.0
+Sponge_South_Width = 50.0
+Sponge_North_Width = 50.0
+R_Sponge = 0.85
+A_Sponge = 5.0
+TID_LOW_PASS = T
+
+! ------------------WAVE AVERAGE CONTROL--------------------------
+WAVE_AVERAGE_ON = F
+WAVE_AVERAGE_START = 900.0
+WAVE_AVERAGE_END = 3000.0
+WaveheightID = 2
+
+! --------------------PROBE OUTPUT---------------------------------
+! output variables at stations which are given in file stat.txt
+NSTAT = 8
+PLOT_INTV_STAT = 0.2 
+  ! ----------------- COUPLING -------------------------
+  ! if do coupling, have to set -DCOUPLING in Makefile
+COUPLING_FILE = coupling.txt
+  ! ----------------SHIP WAKES ----------------------------
+VESSEL_FOLDER = ./
+NumVessel = 1
+  ! -----------------OUTPUT-----------------------------
+! --------------------FIELD OUTPUT---------------------------------
+! output variables, T=.TRUE, F = .FALSE.
+! OUT_H = water depth
+! OUT_E = surface elevation
+! OUT_U = velocity in x direction
+! OUT_V = velocity in y direction
+! OUT_W = velocity in z direction
+! OUT_P = dynamic pressure
+! OUT_K = turbulent kinetic energy
+! OUT_D = turbulent dissipation rate
+! OUT_S = shear production
+! OUT_C = eddy viscosity
+! OUT_B = bubble void fraction
+! OUT_I = salinity
+! OUT_J = density
+OUT_DEP = T
+OUT_ETA = T
+OUT_U = F
+OUT_V = F
+OUT_W = F
+OUT_P = F
+OUT_TKE = F
+OUT_EPS = F
+OUT_S = F
+OUT_MU = F
+OUT_BUB = F
+OUT_A = F
+OUT_T = F
+OUT_F = F
+OUT_G = F
+OUT_SALI = F
+OUT_TEMP = F
+OUT_RHO = F
+OUT_VESSEL = T

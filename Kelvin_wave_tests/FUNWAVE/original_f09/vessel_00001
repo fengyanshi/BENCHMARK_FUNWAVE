@@ -1,0 +1,14 @@
+Title: Vessel # 1
+PRESSURE, 1
+Length(m), Width(m), Alpha1(m),  Alpha2(m), Beta(m), P(unit)
+10.0  10.0, 0.0, 0.0, 0.0, 1.0
+Time, X(m), Y(m)  (relative to the origin of the coordinates)
+0.0   50.0  128.0
+1000.0 8959.5 128.0
+
+U=8.9;
+>> FL=0.7;
+>> L=U^2/FL^2/9.8
+L=16.4952
+F 1.2 sqrt(10*9.8)*1.2*1000+50=11929.0
+F 0.9 sqrt(10*9.8)*0.9*1000+50=8959.5
