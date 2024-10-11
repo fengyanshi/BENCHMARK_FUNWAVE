@@ -1,0 +1,8 @@
+echo next
+/usr/local/ossh/bin/scp fshi@carpenter.erdc.hpc.mil:/p/work/fshi/kelvin_01/output/sta* /Volumes/Solid/Kelvin_wave/FUNWAVE/F09_L10/.
+/usr/local/ossh/bin/scp fshi@carpenter.erdc.hpc.mil:/p/work/fshi/kelvin_01/output/eta_* /Volumes/Solid/Kelvin_wave/FUNWAVE/F09_L10/.
+echo end
+
+
+
+
