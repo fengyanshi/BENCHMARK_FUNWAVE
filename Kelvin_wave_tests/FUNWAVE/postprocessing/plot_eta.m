@@ -1,10 +1,10 @@
 clear all
-cases='F09_L10';
+cases='F08_L20';
 fdir = ['/Volumes/Solid/Kelvin_wave/FUNWAVE/' cases '/'];
 
-files=[20:20];
+files=[1:49];
 
-m=2048;
+m=3072;
 n=512;
 dx=0.5;
 dy=0.5;
@@ -42,10 +42,10 @@ eta=load([fdir 'eta_' fnum],'-ASCII');
 clf
 pcolor(X,Y,eta),shading flat
 colorbar
-caxis([-1 1])
+caxis([-0.5 0.5])
 xlabel('x(m)')
 ylabel('y(m)')
-title(['Case: ' cases '  Time = '  num2str(files(k)*5.0) ' sec'])
+title(['Case: ' cases '  Time = '  num2str(files(k)*2.0) ' sec'])
 
 hold on
 plot(xs,ys,'ro')

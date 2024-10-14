@@ -1,23 +1,26 @@
 clear all
-cases='funwave_case2';
-fdir = ['/Users/fyshi/TMP/tmp3/' cases '/'];
+cases='F08_L20';
+fdir = ['/Volumes/Solid/Kelvin_wave/FUNWAVE/' cases '/'];
 
-site=[10];
+
+site=[4:11];
 
 df=0.0005;
 
-xblock1{site(1)}=[20,60,60,20,20];yblock1{site(1)}=[0.12,0.22,0.34-df,0.22-df,0.14];
-xblock2{site(1)}=[35,53,53,35,35];yblock2{site(1)}=[0.27,0.325,0.40,0.36,0.27];
-xblock3{site(1)}=[550,980,980,550,550];yblock3{site(1)}=[0.0025,0.0025,0.0075,0.0075,0.0025];
-xblock4{site(1)}=[200,980,980,200,200];yblock4{site(1)}=[0.0075+df,0.0075+df,0.0125-df,0.0125-df,0.0075+df];
-xblock5{site(1)}=[200,980,980,200,200];yblock5{site(1)}=[0.0125,0.0125,0.02,0.02,0.0125];
+for k=1:length(site)
+xblock1{site(k)}=[20,60,60,20,20];yblock1{site(k)}=[0.12,0.22,0.34-df,0.22-df,0.14];
+xblock2{site(k)}=[35,53,53,35,35];yblock2{site(k)}=[0.27,0.325,0.40,0.36,0.27];
+xblock3{site(k)}=[550,980,980,550,550];yblock3{site(k)}=[0.0025,0.0025,0.0075,0.0075,0.0025];
+xblock4{site(k)}=[200,980,980,200,200];yblock4{site(k)}=[0.0075+df,0.0075+df,0.0125-df,0.0125-df,0.0075+df];
+xblock5{site(k)}=[200,980,980,200,200];yblock5{site(k)}=[0.0125,0.0125,0.02,0.02,0.0125];
+end
 
 for k=1:length(site)
 fnum=sprintf('%.4d',site(k));
 data=load([fdir 'sta_' fnum],'-ASCII');
 
 time=data(1:1:490,1);
-eta=data(1:1:490,2)*0.35;
+eta=data(1:1:490,2);
 
 dt=0.1;
 fs=1/dt;
@@ -102,7 +105,10 @@ xq=X(:);yq=Y(:);
 plot([0 100],[0.3 0.3],'w--','LineWidth',2)
 text(22,0.35,'kh = \pi','Color','w','FontSize',13)
 
-axis([20 65 0 1]);box on
+ax1=[20 75 0 0.6];
+ax2=[20 75 -0.5 0.5];
+
+axis(ax1);box on
 
 % part ----------
 pos2 = [0.18 0.40 0.675 0.2];
@@ -111,13 +117,13 @@ subplot('Position',pos2)
 STFT_part(in1,STFT,anal_win, synth_win, hop, nfft, fs,f0,t0,t, x,1);
  ylabel('$$\eta(m)$$','interpreter','latex','FontSize',13)
 legend('time series','divergence chirp')
-axis([20 65 -1 1]);box on
+axis(ax2);box on
 %
 subplot('Position',pos4)
 STFT_part(in2,STFT,anal_win, synth_win, hop, nfft, fs,f0,t0,t, x,3);
 ylabel('$$\eta(m)$$','interpreter','latex','FontSize',13)
 legend('fake high frequencies')
-axis([20 65 -1 1]);box on
+axis(ax2);box on
 %
 %set(gca,'xtick',[])
 % ylabel('$$\eta(m)$$','interpreter','latex','FontSize',13)
@@ -129,9 +135,7 @@ xlabel('$$Time(s)$$','interpreter','latex','FontSize',13);
 % ----------
 %title(['Case: ' cases(1:3) ' ' cases(5:end) ', gauge: ' num2str(site(k))])
 
-eval(['mkdir ' 'plots/' cases]);
-
-fname=['plots/' cases '/' 'dec_' cases '_' num2str(site(k)) '.jpg'];
+fname=['../plots/' 'spc_' cases '_site_' num2str(site(k)) '.jpg' ];
 print('-djpeg100', fname);
 
 end
