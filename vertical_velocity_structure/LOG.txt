@@ -1,0 +1,209 @@
+ -------------- LOG FILE -----------------
+ 2D_beach                                                                        
+  --------------input start --------------
+                                          
+ -------------- PARALLEL -----------------
+ PX   =  4 PY   =  1
+                                          
+ -------------- GRID INFO -----------------
+ Mglob=    2000 Nglob=      50
+ DX=        1.00 DY=        1.00
+ DEPTH_TYPE:FLAT                                              
+DEPTH_FLAT       10.00
+                                          
+ -------------- TIME INFO -----------------
+         PLOT_START_TIME Default:  0.0 s
+                             StationOutputBuffer not specified, use default:1000
+ TOTAL_TIME=      100.00
+ PLOT_INTV=        10.00
+ SCREEN_INTV=       20.00
+                                          
+ -------------- HOT START -----------------
+                                          
+ -------------- STILL WATER INFO -----------------
+       WaterLevel =      0.00000
+                                          
+ -------------- WAVEMAKER -----------------
+ WAVEMAKER:WK_REG                                            
+                 Time_ramp Default:  0.0
+               Ywidth_WK Default:  LARGE
+ Xc_WK   =     1000.00
+ Yc_WK   =        0.00
+ Tperiod =        9.00
+ AMP_WK  =        0.50
+ DEP_WK  =       10.00
+ Theta_WK=        0.00
+ Time_ramp=        0.00
+  Delta_WK=        2.00
+ Ywidth_WK=   999999.00
+          EqualEnergy NOT USED in frequency domain
+                                          
+ -------------- PERIODIC BC -----------------
+  PERIODIC: T
+                                          
+ -------------- SPONGE -----------------
+                   DIRECT_SPONGE IS USED
+                 FRICTION_SPONGE IS USED
+ FRICTION_SPONGE CDsponge=        1.00
+                 R_sponge Default:  0.85
+                  A_sponge Default:  5.0
+ Sponge_west_width =      200.00
+ Sponge_east_width =      200.00
+ Sponge_south_width=        0.00
+ Sponge_north_width=        0.00
+ R_sponge          =        0.85
+ A_sponge          =        5.00
+              No WavemakerCurrentBalance
+                                          
+ -------- OBSTACLE and BREAKWATER -----------------
+ OBSTACLE_FILE:   NO
+    BREAKWATER_FILE:   NO
+     BreakWaterAbsorbCoef Default:  10.0
+                                          
+ -------------- PHYSICS -----------------
+         DISPERSION Default:  DISPERSION
+        Gamma1 Default:  1.0: DISPERSION
+              Gamma2 Default:  1.0: Full nonlinear
+               Beta_ref Default:  -0.531
+                      Gamma3 Default:  1.0: NOT fully linear
+  Summary of Physics
+ Gamma1 =         1.00
+ Gamma2 =         1.00
+Beta_ref=        -0.53
+ Gamma3 =         1.00
+ VISCOSITY_BREAKING IS USED
+               SWE_ETA_DEP Default:  0.8
+             Friction_Matrix Default:  constant Cd
+  Cd_fixed (if you used fixed Cd) =        0.00
+                                          
+ -------------- NUMERICS -----------------
+       Time_Scheme Default:  Runge_Kutta
+ TIME_SCHEME:Runge_Kutta                                       
+  CONSTRUCTION                              NOT DEFINED, USE HLL
+ CONSTRUCTION:HLLC                                              
+  HIGH_ORDER                     NOT DEFINED, USE FOURTH-ORDER
+ HIGH_ORDER:FOURTH                                            
+ CFL=        0.50
+  FroudeCap=        1.00
+             MinDepthFrc Default:  0.1 m
+          USE MIN(MinDepthFrc, MinDepth)
+ MinDepth=    0.010000
+ MinDepthFrc=    0.010000
+                               Dont record wave arrival time
+                                          
+ --------- WAVE BREAKING -----------------
+                      ROLLER_EFFECT:  NO
+            SHOW_BREAKING Default:  TRUE
+ Cbrk1 =    0.650000
+ Cbrk2 =    0.350000
+            WAVEMAKER_Cbrk Default:  1.0
+  WAVEMAKER_Cbrk =         1.000000
+           WAVEMAKER_VIS Default:  FALSE
+                                          
+ -------- WAVE-AVERAGED PROPERTY -----------------
+                     C_smg Default:  0.0
+ T_INTV_mean =80000.000000
+ STEADY_TIME =  180.000000
+ C_smg =    0.000000
+                    nu_bkg Default:  0.0
+                                          
+ -------------- OUTPUT INFO -----------------
+ RESULT_FOLDER:/Users/fyshi/TMP/tmp6/                            
+ FIELD_IO_TYPE = ASCII                                                                           
+         OUTPUT_RES NOT FOUND, OUTPUT_RES=1: full resolution
+     OUTPUT_RES         1
+      OUT_DEPTH T
+          OUT_U T
+          OUT_V T
+        OUT_ETA T
+       OUT_Hmax F
+       OUT_Hmin F
+       OUT_Umax F
+      OUT_MFmax F
+     OUT_VORmax F
+       OUT_MASK T
+      OUT_MASK9 F
+      OUT_Umean T
+      OUT_Vmean T
+    OUT_ETAmean T
+ OUT_WaveHeight T
+        OUT_SXL F
+        OUT_SXR F
+        OUT_SYL F
+        OUT_SYR F
+    OUT_SourceX F
+    OUT_SourceY F
+          OUT_P F
+          OUT_Q F
+         OUT_Fx F
+         OUT_Fy F
+         OUT_Gx F
+         OUT_Gy F
+        OUT_AGE F
+     OUT_ROLLER F
+   OUT_UNDERTOW F
+         OUT_NU F
+        OUT_TMP F
+       OUT_TIME F
+                                          
+  --------------input end --------------
+                                          
+   WaveMakerPointNum Default:  30 points
+                                        TIDAL_BC_ABS not defined, Default: False
+ ----------------- STATISTICS ----------------
+  TIME        DT
+  0.0000E+00  0.0000E+00
+  MassVolume  Energy      MaxEta      MinEta      Max U       Max V 
+  0.0000E+00  0.4907E+08  0.0000E+00  0.0000E+00  0.0000E+00  0.0000E+00
+  MaxTotalU   PhaseS      Froude      WetDryMass
+  0.0000E+00  0.3132E+00  0.0000E+00  0.0000E+00
+  TideWest    TideEast      TideSouth    TideNorth
+  0.0000E+00  0.0000E+00  0.0000E+00  0.0000E+00
+   PRINTING FILE NO.     0  TIME/TOTAL:        0.000 /     100.000
+   PRINTING FILE NO.     1  TIME/TOTAL:       10.031 /     100.000
+ ----------------- STATISTICS ----------------
+  TIME        DT
+  0.2000E+02  0.4700E-01
+  MassVolume  Energy      MaxEta      MinEta      Max U       Max V 
+ -0.7579E+03  0.4899E+08  0.5569E+00 -0.4352E+00  0.4638E+00  0.9672E-06
+  MaxTotalU   PhaseS      Froude      WetDryMass
+  0.4638E+00  0.1018E+02  0.4559E-01  0.0000E+00
+  TideWest    TideEast      TideSouth    TideNorth
+  0.0000E+00  0.0000E+00  0.0000E+00  0.0000E+00
+   PRINTING FILE NO.     2  TIME/TOTAL:       20.000 /     100.000
+   PRINTING FILE NO.     3  TIME/TOTAL:       30.000 /     100.000
+ ----------------- STATISTICS ----------------
+  TIME        DT
+  0.4004E+02  0.4689E-01
+  MassVolume  Energy      MaxEta      MinEta      Max U       Max V 
+ -0.1758E+04  0.4891E+08  0.5825E+00 -0.5385E+00  0.4760E+00  0.1479E-05
+  MaxTotalU   PhaseS      Froude      WetDryMass
+  0.4760E+00  0.1019E+02  0.4672E-01  0.0000E+00
+  TideWest    TideEast      TideSouth    TideNorth
+  0.0000E+00  0.0000E+00  0.0000E+00  0.0000E+00
+   PRINTING FILE NO.     4  TIME/TOTAL:       40.041 /     100.000
+   PRINTING FILE NO.     5  TIME/TOTAL:       50.028 /     100.000
+ ----------------- STATISTICS ----------------
+  TIME        DT
+  0.6002E+02  0.4686E-01
+  MassVolume  Energy      MaxEta      MinEta      Max U       Max V 
+ -0.1328E+04  0.4897E+08  0.5866E+00 -0.4864E+00  0.4781E+00  0.1659E-05
+  MaxTotalU   PhaseS      Froude      WetDryMass
+  0.4781E+00  0.1019E+02  0.4691E-01  0.0000E+00
+  TideWest    TideEast      TideSouth    TideNorth
+  0.0000E+00  0.0000E+00  0.0000E+00  0.0000E+00
+   PRINTING FILE NO.     6  TIME/TOTAL:       60.015 /     100.000
+   PRINTING FILE NO.     7  TIME/TOTAL:       70.002 /     100.000
+ ----------------- STATISTICS ----------------
+  TIME        DT
+  0.8003E+02  0.4684E-01
+  MassVolume  Energy      MaxEta      MinEta      Max U       Max V 
+ -0.1676E+03  0.4910E+08  0.5909E+00 -0.4876E+00  0.4844E+00  0.2149E-05
+  MaxTotalU   PhaseS      Froude      WetDryMass
+  0.4844E+00  0.1019E+02  0.4753E-01  0.0000E+00
+  TideWest    TideEast      TideSouth    TideNorth
+  0.0000E+00  0.0000E+00  0.0000E+00  0.0000E+00
+   PRINTING FILE NO.     8  TIME/TOTAL:       80.025 /     100.000
+   PRINTING FILE NO.     9  TIME/TOTAL:       90.009 /     100.000
+ Simulation takes   63.9111938     seconds
+ Normal Termination!
