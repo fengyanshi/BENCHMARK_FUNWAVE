@@ -1,8 +1,8 @@
 clear all
-cases='Hres_F09_3layers';
-fdir = ['/Users/fyshi/TMP/tmp2/' cases '/'];
+cases='F10_L10';
+fdir = ['/Volumes/Solid/Kelvin_wave/F2WAVE/' cases '/'];
 
-files=[9];
+files=[17];
 
 dx=0.5;
 dy=0.5;

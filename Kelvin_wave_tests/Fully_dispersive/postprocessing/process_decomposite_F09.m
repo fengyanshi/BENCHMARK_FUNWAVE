@@ -1,7 +1,6 @@
 clear all
-cases='F09_12layers';
-fdir = ['/Users/fyshi/TMP/tmp2/' cases '/'];
-
+cases='F10_L10';
+fdir = ['/Volumes/Solid/Kelvin_wave/F2WAVE/' cases '/'];
 site=[12];
 
 df=0.0005;
