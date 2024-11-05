@@ -2,7 +2,7 @@ clear all
 
 m=3072;
 n=1024;
-dx=2.0;
+dx=0.5;
 x=[0:m-1]*dx;
 y=(0:n-1)*dx;
 dep=zeros([n,m]);
