@@ -1,0 +1,31 @@
+echo next
+./cp_F06_6layers
+echo next
+./cp_F06_9layers
+echo next
+./cp_F08_3layers
+echo next
+./cp_F08_6layers
+echo next
+./cp_F08_9layers
+echo next
+./cp_F10_6layers
+echo next
+./cp_F10_9layers
+echo next
+./cp_F12_6layers
+echo next
+./cp_F12_9layers
+echo next
+./cp_F14_3layers
+echo next
+./cp_F14_6layers
+echo next
+./cp_F16_3layers
+echo next
+./cp_F16_6layers
+echo end
+
+
+
+
