@@ -1,0 +1,18 @@
+echo next
+mkdir /Volumes/Solid/Kelvin_wave/F2WAVE/F10_3layers/
+/usr/local/ossh/bin/scp fshi@carpenter.erdc.hpc.mil:/p/work/fshi/F2W/output/sta* /Volumes/Solid/Kelvin_wave/F2WAVE/F10_3layers/.
+echo next
+/usr/local/ossh/bin/scp fshi@carpenter.erdc.hpc.mil:/p/work/fshi/F2W/output/eta* /Volumes/Solid/Kelvin_wave/F2WAVE/F10_3layers/.
+echo next
+/usr/local/ossh/bin/scp fshi@carpenter.erdc.hpc.mil:/p/work/fshi/F2W/output/u* /Volumes/Solid/Kelvin_wave/F2WAVE/F10_3layers/.
+echo next
+/usr/local/ossh/bin/scp fshi@carpenter.erdc.hpc.mil:/p/work/fshi/F2W/output/v* /Volumes/Solid/Kelvin_wave/F2WAVE/F10_3layers/.
+echo next
+/usr/local/ossh/bin/scp fshi@carpenter.erdc.hpc.mil:/p/work/fshi/F2W/output/w* /Volumes/Solid/Kelvin_wave/F2WAVE/F10_3layers/.
+echo next
+/usr/local/ossh/bin/scp fshi@carpenter.erdc.hpc.mil:/p/work/fshi/F2W/LOG.txt /Volumes/Solid/Kelvin_wave/F2WAVE/F10_3layers/.
+echo end
+
+
+
+

@@ -1,5 +1,5 @@
 clear all
-cases='F12_3layers';
+cases='F12_9layers';
 fdir = ['/Volumes/Solid/Kelvin_wave/F2WAVE/' cases '/'];
 
 
@@ -19,8 +19,8 @@ for k=1:length(site)
 fnum=sprintf('%.4d',site(k));
 data=load([fdir 'sta_' fnum],'-ASCII');
 
-time=data(1:1:600,1);  % use 625 for f12. 490 for f14, 395 for f16
-eta=data(1:1:600,2);
+time=data(:,1);  % use 625 for f12. 490 for f14, 395 for f16
+eta=data(:,2);
 
 dt=0.1;
 fs=1/dt;

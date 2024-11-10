@@ -1,8 +1,8 @@
 clear all
-cases='F10_L10';
+cases='F06_3layers';
 fdir = ['/Volumes/Solid/Kelvin_wave/F2WAVE/' cases '/'];
 
-files=[17];
+files=[1:];
 
 dx=0.5;
 dy=0.5;
